@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     descripcion: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.STRING(600),
       allowNull: true
     },
     fechacreacion: {

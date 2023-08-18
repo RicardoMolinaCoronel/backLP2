@@ -3,12 +3,13 @@ var express = require('express');
 
   /* IMPORTE El ARCHIVO CON EL NOMBRE_CLASE */
   const publicacion = require('../models').publicacion;
+  const { Op } = require("sequelize");
 router.get('/findAll/json', function(req, res, next) {  
 
     	/* MÉTODO ESTÁTICO findAll  */
 
       publicacion.findAll({  
-          attributes: { exclude: ["updatedAt", "createdAt"] } ,
+          
       })  
       .then(resultado => {  
           res.json(resultado);  
@@ -29,6 +30,25 @@ router.get('/findAll/json', function(req, res, next) {
             }
           })
           .catch(error => res.status(400).send(error))
+    });
+    router.get('/findAllByDate/:date/json', function(req, res, next) {  
+
+    	/* MÉTODO ESTÁTICO findAll  */
+      let date= req.params.date;
+      publicacion.findAll({  
+        
+          
+          where: {
+           fechacreacion:{
+            [Op.between]:[date+" 00:00:00",date+" 23:59:59"]
+           }
+          }
+      })  
+      .then(resultado => {  
+          res.json(resultado);  
+      })  
+      .catch(error => res.status(400).send(error)) 
+
     });	
       router.post('/save', function(req, res, next) {  
 
@@ -64,4 +84,6 @@ router.put('/update/:id', function(req, res, next) {
           .catch(error => res.status(400).send(error))
 		  
       });  
+  
+
     module.exports = router;

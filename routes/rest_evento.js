@@ -36,11 +36,11 @@ router.get('/findAll/json', function(req, res, next) {
       
       evento.findAll({
         where: {
-          fecha: {
+          fechaevento: {
             [Op.gte]: startDate
           }
         },
-        order: [['fecha', 'ASC']] // Ordenar por fecha ascendente
+        order: [['fechaevento', 'ASC']] // Ordenar por fecha ascendente
       })
       .then(eventos => {
         if (eventos.length > 0) {
@@ -58,7 +58,7 @@ router.get('/findAll/json', function(req, res, next) {
            
       evento.findAll({
         where: {
-          fecha: date // Filtrar por la fecha proporcionada en la URL
+          fechaevento: date // Filtrar por la fecha proporcionada en la URL
         }
       })
       .then(eventos => {
@@ -78,7 +78,7 @@ router.get('/findAll/json', function(req, res, next) {
       
       evento.findAll({
         where: {
-          fecha: {
+          fechaevento: {
             [Op.between]: [startDate, endDate]
           }
         }
@@ -99,7 +99,7 @@ router.get('/findAll/json', function(req, res, next) {
 
       evento.findAll({
         where: {
-          ubicacion: location
+          lugarevento: location
         }
       })
       .then(eventos => {

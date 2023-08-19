@@ -31,6 +31,27 @@ router.get('/findAll/json', function(req, res, next) {
           .catch(error => res.status(400).send(error))
     });	
 
+    router.get('/findUpcomingEvents/:startDate/json', function(req, res, next) {
+      let startDate = req.params.startDate;
+      
+      evento.findAll({
+        where: {
+          fecha: {
+            [Op.gte]: startDate
+          }
+        },
+        order: [['fecha', 'ASC']] // Ordenar por fecha ascendente
+      })
+      .then(eventos => {
+        if (eventos.length > 0) {
+          res.status(200).json(eventos);
+        } else {
+          res.status(404).json({ error: "No existen eventos próximos a partir de la fecha proporcionada" });
+        }
+      })
+      .catch(error => res.status(400).send(error));
+    });
+
 
     router.get('/findByDate/:date/json', function(req, res, next) {
       let date = req.params.date;
@@ -50,7 +71,7 @@ router.get('/findAll/json', function(req, res, next) {
       .catch(error => res.status(400).send(error));
     });
 
-    
+
     router.get('/findByDateRange/:startDate/:endDate/json', function(req, res, next) {
       let startDate = req.params.startDate;
       let endDate = req.params.endDate;

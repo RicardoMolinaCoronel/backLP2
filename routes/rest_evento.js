@@ -1,7 +1,7 @@
 var express = require('express');
   var router = express.Router();
   const { Op } = require('sequelize');
-  /* IMPORTE El ARCHIVO CON EL NOMBRE_CLASE */
+  /* IMPORTE El ARCHIVO CON EL NOMBRE_CLASE */ //
   const evento = require('../models').evento;
 router.get('/findAll/json', function(req, res, next) {  
 

@@ -10,6 +10,7 @@ var publicacionRouter = require('./routes/rest_publicacion');
 var eventoRouter = require('./routes/rest_evento');
 var comentarioRouter = require('./routes/rest_comentario');
 var likeRouter = require('./routes/rest_like');
+var likepublicacionRouter = require('./routes/rest_like_publicacion');
 var usuarioRouter = require('./routes/rest_usuario');
 
 var app = express();
@@ -30,6 +31,7 @@ app.use('/users', usersRouter);
   app.use('/rest/evento', eventoRouter);
   app.use('/rest/comentario', comentarioRouter);
   app.use('/rest/like', likeRouter);
+  app.use('/rest/likepublicacion', likepublicacionRouter);
   app.use('/rest/usuario', usuarioRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
